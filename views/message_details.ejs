@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Details</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <%- include('components/nav') %>
+    <h1>Message Details</h1>
+    <div class="message-container">
+      <span>
+        <a href="<%= locals.message.url %>">
+          <h2 style="display: inline-block"><%= locals.message?.title %></h2></a
+        >
+        by <%= locals.message?.author?.username %>
+      </span>
+
+      <p><%= locals.message?.contents %></p>
+      <% if (locals.currentUser?.isAdmin) { %>
+      <form action="<%= locals.message.url %>/delete" method="POST">
+        <button>Delete</button>
+      </form>
+      <% } %>
+  </body>
+</html>

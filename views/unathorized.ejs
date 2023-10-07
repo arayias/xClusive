@@ -10,6 +10,15 @@
     <%- include('components/nav') %>
     <h1>Unauthorized 🛑</h1>
     <p>You are not authorized to view this page.</p>
+    <p>
+      <% if (locals.errors) { %>
+      <ul>
+        <% locals.errors.forEach(function(error) { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </p>
     <p></p>
     <a href="/">Go back home</a>
   </body>

@@ -6,7 +6,7 @@
 
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: calc(14px + 0.2vw) "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -107,3 +107,63 @@ form textarea {
   border: 1px solid #ccc;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
+.message-board {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+ul li.message-container + ul li.message-container {
+  border-bottom: 1px solid #ccc;
+}
+
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  nav li:first-child {
+    margin:0;
+
+  }
+
+  nav li:last-child {
+    margin:0;
+  }
+
+  nav li img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+
+  form input,
+  form textarea {
+    width: 100%;
+  }
+
+  form button {
+    width: 100%;
+  }
+}
+```
+```

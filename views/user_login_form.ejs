@@ -28,6 +28,11 @@
           placeholder="Password"
         />
       </div>
+      <% if (locals.error) { %>
+      <div class="form-container">
+        <p style="color: red"><%= locals.error %></p>
+      </div>
+      <% } %>
       <div class="form-container">
         <button>Login</button>
       </div>

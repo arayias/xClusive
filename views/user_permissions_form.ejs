@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secret 🔒</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Hi <%= locals.currentUser?.username %>, welcome to the club!</h1>
+    <form action="" method="post">
+      <label for="permissions">Choose your permissions</label>
+      <select id="permissions" name="permissions">
+        <option value="admin">Admin</option>
+        <option value="member">Member</option>
+      </select>
+      <button>Submit</button>
+    </form>
+  </body>
+</html>

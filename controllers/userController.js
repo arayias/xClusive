@@ -71,3 +71,48 @@ exports.user_logout_get = function (req, res, next) {
     res.redirect("/");
   });
 };
+
+exports.user_permissions_get = function (req, res, next) {
+  if (!req.user) {
+    res.render("unathorized", {
+      errors: [{ msg: "You must be logged in to view permissions" }],
+    });
+    return;
+  }
+  res.render("user_permissions_form");
+};
+
+exports.user_permissions_post = [
+  body("permissions", "You must select one permission").isString().escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(
+      "permissions: " + JSON.stringify(req.body.permissions, null, 2),
+      "errors: " + JSON.stringify(errors, null, 2),
+      "user" + JSON.stringify(req.user, null, 2)
+    );
+    if (!errors.isEmpty()) {
+      res.render("user_permissions_form", {
+        errors: errors.array(),
+      });
+    } else {
+      const user = await User.findById(req.user.id);
+      switch (req.body.permissions) {
+        case "admin":
+          user.isAdmin = true;
+          user.isMember = true;
+          break;
+        case "member":
+          user.isAdmin = false;
+          user.isMember = true;
+          break;
+        default:
+          user.isAdmin = false;
+          user.isMember = false;
+          break;
+      }
+      await user.save();
+      res.redirect("/");
+    }
+  }),
+];

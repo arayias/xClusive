@@ -8,12 +8,17 @@ router.get(
   "/",
   asyncHandler(async (req, res, next) => {
     const messages = await Message.find().sort({ time: -1 }).populate("author");
-
-    messages.map((message) => {
-      message.time = message.time.toLocaleString();
-      message.author.username = "🤫";
-      //
-    });
+    console.log(req.user);
+    if (
+      typeof req.user == "undefined" ||
+      (!req.user?.isAdmin && !req.user?.isMember)
+    ) {
+      messages.map((message) => {
+        message.time = message.time.toLocaleString();
+        message.author.username = "🤫";
+        //
+      });
+    }
     res.render("index", { messages: messages });
   })
 );

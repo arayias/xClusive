@@ -39,3 +39,21 @@ exports.message_create_post = [
     }
   }),
 ];
+
+exports.message_detail_get = asyncHandler(async (req, res, next) => {
+  const message = await Message.findById(req.params.id).populate("author");
+  if (
+    typeof req.user == "undefined" ||
+    (!req.user?.isAdmin && !req.user?.isMember)
+  ) {
+    message.author.username = "🤫";
+  }
+  console.log(message);
+  res.render("message_details", { message: message });
+});
+
+exports.message_delete_post = asyncHandler(async (req, res, next) => {
+  console.log(req.params.id);
+  const message = await Message.findByIdAndDelete(req.params.id);
+  res.redirect("/");
+});

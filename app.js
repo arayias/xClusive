@@ -36,14 +36,14 @@ passport.use(
     try {
       console.log("Authenticating");
       const user = await User.findOne({ username: username });
-      const match = await bcrypt.compare(password, user.password);
+      const match = await bcrypt.compare(password, user?.password ?? "");
       if (!user) {
         console.log("Incorrect username");
-        return done(null, false, { message: "Incorrect username" });
+        return done(null, false, { error: "Incorrect username" });
       }
       if (!match) {
         console.log("Incorrect password");
-        return done(null, false, { message: "Incorrect password" });
+        return done(null, false, { error: "Incorrect password" });
       }
       console.log("Successfully authenticated");
       return done(null, user);

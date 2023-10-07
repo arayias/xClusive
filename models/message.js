@@ -34,7 +34,7 @@ messageSchema.statics.create = function (title, contents, author) {
 };
 
 messageSchema.virtual("url").get(function () {
-  return `/messages/${this._id}`;
+  return `/message/${this._id}`;
 });
 
 const Message = mongoose.model("Message", messageSchema);

@@ -6,17 +6,32 @@
   </head>
   <body>
     <%- include('components/nav') %>
-    <h1>xClusive</h1>
+    <h1>
+      <a style="display: inline; text-decoration: none" href="/user/permissions"
+        >x</a
+      >Clusive
+    </h1>
     <p>Welcome to xClusive message board</p>
     <% if (locals.messages.length) { %>
-    <ul>
+
+    <ul class="message-board">
       <% locals.messages.forEach(function(message) { %>
       <li>
-        <a href="<%= message.url %>">
-          <h2><%= message.title %></h2>
-        </a>
-        <p><%= message.contents %></p>
-        <p><%= message.author.username %></p>
+        <div class="message-container">
+          <span>
+            <a href="<%= message.url %>">
+              <h2 style="display: inline-block"><%= message.title %></h2></a
+            >
+            by <%= message.author.username %>
+          </span>
+
+          <p><%= message.contents %></p>
+          <% if (locals.currentUser?.isAdmin) { %>
+          <form action="<%= message.url %>/delete" method="POST">
+            <button>Delete</button>
+          </form>
+          <% } %>
+        </div>
       </li>
       <% }) %> <% } %>
     </ul>
