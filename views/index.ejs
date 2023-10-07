@@ -8,5 +8,17 @@
     <%- include('components/nav') %>
     <h1>xClusive</h1>
     <p>Welcome to xClusive message board</p>
+    <% if (locals.messages.length) { %>
+    <ul>
+      <% locals.messages.forEach(function(message) { %>
+      <li>
+        <a href="<%= message.url %>">
+          <h2><%= message.title %></h2>
+        </a>
+        <p><%= message.contents %></p>
+        <p><%= message.author.username %></p>
+      </li>
+      <% }) %> <% } %>
+    </ul>
   </body>
 </html>

@@ -5,17 +5,18 @@ const messageSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    minlength: 1,
+    minlength: 3,
     maxlength: 40,
   },
   contents: {
     type: String,
     required: true,
-    minlength: 1,
+    minlength: 3,
   },
   author: {
     type: Types.ObjectId,
     ref: "User",
+    required: true,
   },
   time: {
     type: Date,
@@ -26,7 +27,7 @@ const messageSchema = new mongoose.Schema({
 messageSchema.statics.create = function (title, contents, author) {
   const message = new this({
     title,
-    contents,
+    message,
     author,
   });
   return message.save();
