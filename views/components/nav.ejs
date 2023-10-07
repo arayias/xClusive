@@ -9,11 +9,25 @@
       </a>
     </li>
     <%- locals.currentUser ? `
-    <li><a href="/user/logout">Logout</a></li>
-    <li><a href="/message/create">Create</a></li>
+    <li>
+      <a href="/user/logout">
+        <button class="nav-btn logout-btn">Logout</button>
+      </a>
+    </li>
+    <li>
+      <a href="/message/create"
+        ><button class="nav-btn create-btn">Create</button></a
+      >
+    </li>
     ` : `
-    <li><a href="/user/login">Login</a></li>
-    <li><a href="/user/signup">Sign Up</a></li>
+    <li>
+      <a href="/user/login"><button class="nav-btn login-btn">Login</button></a>
+    </li>
+    <li>
+      <a href="/user/signup"
+        ><button class="nav-btn signup-btn">Sign-up</button></a
+      >
+    </li>
     ` %>
   </ul>
 </nav>
